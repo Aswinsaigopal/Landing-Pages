@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APX Wealth Premier - Wealth Management Solutions</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #0891b2;
+            --accent-color: #06b6d4;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f8fafc;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+
+        .apx-logo {
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-dark) !important;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color) !important;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(8, 145, 178, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1e40af 50%, var(--secondary-color) 100%);
+            color: white;
+            padding: 8rem 0 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(6,182,212,0.1)" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .stats {
+            background: rgba(6, 182, 212, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: var(--bg-light);
+            padding: 6rem 0;
+        }
+
+        .form-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            margin-top: -4rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .form-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .form-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* Mautic Form Styling Integration */
+        .mauticform_wrapper {
+            max-width: 100% !important;
+            margin: 0 !important;
+        }
+
+        .mauticform-row {
+            display: block;
+            margin-bottom: 1.5rem !important;
+        }
+
+        .mauticform-label {
+            font-size: 1rem !important;
+            display: block;
+            font-weight: 600 !important;
+            margin-bottom: 0.5rem !important;
+            color: var(--text-dark) !important;
+        }
+
+        .mauticform-row.mauticform-required .mauticform-label:after {
+            color: #dc2626 !important;
+            content: " *";
+            display: inline;
+        }
+
+        .mauticform-input, .mauticform-selectbox, .mauticform-textarea {
+            width: 100% !important;
+            padding: 0.75rem 1rem !important;
+            border: 2px solid var(--border-color) !important;
+            border-radius: 10px !important;
+            font-size: 1rem !important;
+            transition: all 0.3s ease !important;
+            background: #fff !important;
+            box-shadow: none !important;
+        }
+
+        .mauticform-input:focus, .mauticform-selectbox:focus, .mauticform-textarea:focus {
+            border-color: var(--secondary-color) !important;
+            box-shadow: 0 0 0 0.2rem rgba(8, 145, 178, 0.1) !important;
+            outline: none !important;
+        }
+
+        .mauticform-button {
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color)) !important;
+            border: none !important;
+            padding: 1rem 3rem !important;
+            font-weight: 600 !important;
+            border-radius: 50px !important;
+            font-size: 1.1rem !important;
+            width: 100% !important;
+            transition: all 0.3s ease !important;
+            color: white !important;
+            cursor: pointer !important;
+        }
+
+        .mauticform-button:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 15px 35px rgba(8, 145, 178, 0.3) !important;
+        }
+
+        .mauticform-errormsg {
+            display: block !important;
+            color: #dc2626 !important;
+            margin-top: 0.25rem !important;
+            font-size: 0.875rem !important;
+        }
+
+        /* Two column layout for form */
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .form-row .mauticform-row {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--bg-light);
+            padding: 6rem 0;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            margin-right: 1rem;
+        }
+
+        .author-info h5 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info p {
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer h5 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer ul li a:hover {
+            color: white;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(6, 182, 212, 0.2);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .form-container {
+                margin: 2rem 1rem;
+                padding: 2rem 1.5rem;
+            }
+            
+            .form-header h2 {
+                font-size: 2rem;
+            }
+            
+            .stats {
+                margin-top: 2rem;
+                padding: 1.5rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+
+            .form-row .mauticform-row {
+                min-width: 100%;
+            }
+        }
+
+        /* Success/Error Messages */
+        .mauticform-message {
+            background: #10b981 !important;
+            color: white !important;
+            padding: 1rem !important;
+            border-radius: 10px !important;
+            margin-bottom: 1rem !important;
+            text-align: center !important;
+        }
+
+        .mauticform-error {
+            background: #dc2626 !important;
+            color: white !important;
+            padding: 1rem !important;
+            border-radius: 10px !important;
+            margin-bottom: 1rem !important;
+            text-align: center !important;
+        }
+    </style>
+
+    <!-- Mautic Form Styles -->
+    <style type="text/css" scoped>
+        .mauticform-field-hidden { display:none }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <span class="apx-logo">APX</span> Wealth Premier
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary ms-2" href="#consultation">Get Started</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1>Premier Wealth Management Solutions</h1>
+                        <p>Unlock your financial potential with personalized investment strategies, expert advisory services, and exclusive banking privileges designed for high-net-worth individuals.</p>
+                        <a href="#consultation" class="btn btn-light btn-lg me-3">
+                            <i class="fas fa-calendar-alt me-2"></i>Book Consultation
+                        </a>
+                        <a href="#services" class="btn btn-outline-light btn-lg">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="stats">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <div class="stat-number">$50B+</div>
+                                    <div class="stat-label">Assets Under Management</div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <div class="stat-number">25+</div>
+                                    <div class="stat-label">Years Experience</div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <div class="stat-number">10K+</div>
+                                    <div class="stat-label">Satisfied Clients</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lead Generation Form -->
+    <section class="form-section" id="consultation">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="form-container">
+                        <div class="form-header">
+                            <h2>Start Your Wealth Journey</h2>
+                            <p>Complete this form to receive a personalized wealth management consultation</p>
+                        </div>
+
+                        <!-- Mautic CRM Form Integration -->
+                        <div id="mauticform_wrapper_contactus" class="mauticform_wrapper">
+                            <form autocomplete="false" role="form" method="post" action="https://trainingmarketing03.simplecrmdemo.com/form/submit?formId=25" id="mauticform_contactus" data-mautic-form="contactus" enctype="multipart/form-data">
+                                <div class="mauticform-error" id="mauticform_contactus_error"></div>
+                                <div class="mauticform-message" id="mauticform_contactus_message"></div>
+                                <div class="mauticform-innerform">
+                                    <div class="mauticform-page-wrapper mauticform-page-1" data-mautic-form-page="1">
+                                        
+                                        <!-- Name Fields Row -->
+                                        <div class="form-row">
+                                            <div id="mauticform_contactus_f_name" class="mauticform-row mauticform-text mauticform-field-1">
+                                                <label id="mauticform_label_contactus_f_name" for="mauticform_input_contactus_f_name" class="mauticform-label">First Name</label>
+                                                <input type="text" name="mauticform[f_name]" value="" id="mauticform_input_contactus_f_name" placeholder="Your First Name" class="mauticform-input">
+                                                <span class="mauticform-errormsg" style="display:none;"></span>
+                                            </div>
+                                            
+                                            <div id="mauticform_contactus_last_name" class="mauticform-row mauticform-text mauticform-field-2">
+                                                <label id="mauticform_label_contactus_last_name" for="mauticform_input_contactus_last_name" class="mauticform-label">Last Name</label>
+                                                <input type="text" name="mauticform[last_name]" value="" id="mauticform_input_contactus_last_name" placeholder="Your Last Name" class="mauticform-input">
+                                                <span class="mauticform-errormsg" style="display:none;"></span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Contact Fields Row -->
+                                        <div class="form-row">
+                                            <div id="mauticform_contactus_email" class="mauticform-row mauticform-email mauticform-field-3 mauticform-required" data-validate="email" data-validation-type="email">
+                                                <label id="mauticform_label_contactus_email" for="mauticform_input_contactus_email" class="mauticform-label">Email Address</label>
+                                                <input type="email" name="mauticform[email]" value="" id="mauticform_input_contactus_email" placeholder="Enter Valid Email" class="mauticform-input">
+                                                <span class="mauticform-errormsg" style="display:none;">This is required.</span>
+                                            </div>
+                                            
+                                            <div id="mauticform_contactus_mobile_number" class="mauticform-row mauticform-tel mauticform-field-4 mauticform-required" data-validate="mobile_number" data-validation-type="tel">
+                                                <label id="mauticform_label_contactus_mobile_number" for="mauticform_input_contactus_mobile_number" class="mauticform-label">Mobile Number</label>
+                                                <input type="tel" name="mauticform[mobile_number]" value="" id="mauticform_input_contactus_mobile_number" placeholder="Your Phone Number" class="mauticform-input">
+                                                <span class="mauticform-errormsg" style="display:none;">This is required.</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Demographics Row -->
+                                        <div class="form-row">
+                                            <div id="mauticform_contactus_age" class="mauticform-row mauticform-text mauticform-field-5">
+                                                <label id="mauticform_label_contactus_age" for="mauticform_input_contactus_age" class="mauticform-label">Age</label>
+                                                <input type="text" name="mauticform[age]" value="" id="mauticform_input_contactus_age" placeholder="Your Age" class="mauticform-input">
+                                                <span class="mauticform-errormsg" style="display:none;"></span>
+                                            </div>
+                                            
+                                            <div id="mauticform_contactus_city" class="mauticform-row mauticform-text mauticform-field-6">
+                                                <label id="mauticform_label_contactus_city" for="mauticform_input_contactus_city" class="mauticform-label">City</label>
+                                                <input type="text" name="mauticform[city]" value="" id="mauticform_input_contactus_city" placeholder="Your City" class="mauticform-input">
+                                                <span class="mauticform-errormsg" style="display:none;"></span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Financial Fields Row -->
+                                        <div class="form-row">
+                                            <div id="mauticform_contactus_annual_income" class="mauticform-row mauticform-text mauticform-field-7">
+                                                <label id="mauticform_label_contactus_annual_income" for="mauticform_input_contactus_annual_income" class="mauticform-label">Annual Income</label>
+                                                <input type="text" name="mauticform[annual_income]" value="" id="mauticform_input_contactus_annual_income" placeholder="Your Total Annual Income" class="mauticform-input">
+                                                <span class="mauticform-errormsg" style="display:none;"></span>
+                                            </div>
+                                            
+                                            <div id="mauticform_contactus_investment_amount" class="mauticform-row mauticform-text mauticform-field-8">
+                                                <label id="mauticform_label_contactus_investment_amount" for="mauticform_input_contactus_investment_amount" class="mauticform-label">Investment Amount</label>
+                                                <input type="text" name="mauticform[investment_amount]" value="" id="mauticform_input_contactus_investment_amount" placeholder="Planned Investment Amount" class="mauticform-input">
+                                                <span class="mauticform-errormsg" style="display:none;"></span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Investment Goal -->
+                                        <div id="mauticform_contactus_investment_goal" class="mauticform-row mauticform-select mauticform-field-9">
+                                            <label id="mauticform_label_contactus_investment_goal" for="mauticform_input_contactus_investment_goal" class="mauticform-label">Investment Goal</label>
+                                            <select name="mauticform[investment_goal]" value="" id="mauticform_input_contactus_investment_goal" class="mauticform-selectbox">
+                                                <option value="">Primary Investment Goal</option>
+                                                <option value="Wealth Preservation">Wealth Preservation</option>
+                                                <option value="Capital Growth">Capital Growth</option>
+                                                <option value="Income Generation">Income Generation</option>
+                                                <option value="Estate Planning">Estate Planning</option>
+                                                <option value="Tax Optimization">Tax Optimization</option>
+                                                <option value="Diversification">Diversification</option>
+                                                <option value="Real Estate Investment">Real Estate Investment</option>
+                                            </select>
+                                            <span class="mauticform-errormsg" style="display:none;"></span>
+                                        </div>
+
+                                        <!-- Submit Button -->
+                                        <div id="mauticform_contactus_submit" class="mauticform-row mauticform-button-wrapper mauticform-field-10">
+                                            <button class="btn btn-ghost mauticform-button" name="mauticform[submit]" value="1" id="mauticform_input_contactus_submit" type="submit">
+                                                <i class="fas fa-calendar-alt me-2"></i>Schedule Free Consultation
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Hidden Fields -->
+                                <input type="hidden" name="mauticform[formId]" id="mauticform_contactus_id" value="25">
+                                <input type="hidden" name="mauticform[return]" id="mauticform_contactus_return" value="">
+                                <input type="hidden" name="mauticform[formName]" id="mauticform_contactus_name" value="contactus">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="services">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="display-5 fw-bold mb-4">Comprehensive Wealth Solutions</h2>
+                    <p class="lead text-muted">Our premier services are designed to grow, protect, and transfer your wealth efficiently</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Investment Management</h4>
+                        <p>Personalized portfolio management with access to exclusive investment opportunities and institutional-grade research.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Wealth Protection</h4>
+                        <p>Comprehensive insurance solutions and risk management strategies to safeguard your family's financial future.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h4>Estate Planning</h4>
+                        <p>Strategic estate planning and trust services to ensure efficient wealth transfer to future generations.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h4>Tax Optimization</h4>
+                        <p>Advanced tax planning strategies to minimize tax liability and maximize after-tax returns on your investments.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4>Private Banking</h4>
+                        <p>Exclusive banking services with dedicated relationship managers and preferential rates on loans and deposits.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4>Global Access</h4>
+                        <p>International investment opportunities and cross-border wealth management solutions for global citizens.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="display-5 fw-bold mb-4">Client Success Stories</h2>
+                    <p class="lead text-muted">Hear from our satisfied clients about their wealth management journey</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "APX Wealth Premier transformed my financial outlook. Their personalized approach and expert guidance helped me achieve my retirement goals 5 years ahead of schedule."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">JL</div>
+                            <div class="author-info">
+                                <h5>James Liu</h5>
+                                <p>Tech Executive</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "The estate planning services were exceptional. They helped structure my wealth transfer efficiently, saving my family significant taxes."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">ST</div>
+                            <div class="author-info">
+                                <h5>Sarah Thompson</h5>
+                                <p>Business Owner</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Outstanding investment performance and risk management. My portfolio has consistently outperformed market benchmarks."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">MK</div>
+                            <div class="author-info">
+                                <h5>Michael Kim</h5>
+                                <p>Investment Professional</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-20 md:py-32" style="background: linear-gradient(135deg, var(--secondary-color), var(--accent-color)); padding: 5rem 0;">
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="display-5 fw-bold text-white mb-4">Ready to streamline your wealth?</h2>
+                    <p class="lead text-white mb-5 opacity-75">
+                        Join thousands of families who have transformed their financial future with APX Wealth Premier. Start your personalized consultation today.
+                    </p>
+                    <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                        <a href="#consultation" class="btn btn-light btn-lg px-5 py-3">
+                            <i class="fas fa-calendar-alt me-2"></i>Start Free Consultation
+                        </a>
+                        <a href="tel:+65-6123-4567" class="btn btn-outline-light btn-lg px-5 py-3">
+                            <i class="fas fa-phone me-2"></i>Call Now
+                        </a>
+                    </div>
+                    <div class="d-flex flex-column flex-sm-row gap-4 justify-content-center mt-4 text-white">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <span>Free consultation</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <span>No obligations</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <span>Expert guidance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5><span class="apx-logo">APX</span> Wealth Premier</h5>
+                    <p class="mb-4">Your trusted partner in wealth management, providing comprehensive financial solutions for high-net-worth individuals and families.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Services</h5>
+                    <ul>
+                        <li><a href="#">Investment Management</a></li>
+                        <li><a href="#">Wealth Planning</a></li>
+                        <li><a href="#">Estate Planning</a></li>
+                        <li><a href="#">Tax Services</a></li>
+                        <li><a href="#">Private Banking</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Company</h5>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Team</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Research</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Resources</h5>
+                    <ul>
+                        <li><a href="#">Market Insights</a></li>
+                        <li><a href="#">Financial Tools</a></li>
+                        <li><a href="#">Educational Center</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Contact</h5>
+                    <ul>
+                        <li><i class="fas fa-phone me-2"></i>+65 6123 4567</li>
+                        <li><i class="fas fa-envelope me-2"></i>premier@apx.com</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i>Singapore CBD</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 APX Wealth Premier. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-light me-3">Privacy Policy</a>
+                    <a href="#" class="text-light me-3">Terms of Service</a>
+                    <a href="#" class="text-light">Disclaimer</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+        
+        // Phone number formatting
+        const phoneInput = document.getElementById('mauticform_input_contactus_mobile_number');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 6) {
+                    value = value.replace(/(\d{4})(\d{3})(\d{4})/, '$1 $2 $3');
+                } else if (value.length >= 3) {
+                    value = value.replace(/(\d{4})(\d{0,3})/, '$1 $2');
+                }
+                e.target.value = value;
+            });
+        }
+
+        // Form submission tracking
+        const mauticForm = document.getElementById('mauticform_contactus');
+        if (mauticForm) {
+            mauticForm.addEventListener('submit', function() {
+                // Track form submission for analytics
+                console.log('APX Wealth Premier - Lead form submitted');
+                
+                // You can add additional tracking here
+                // Example: Google Analytics, Facebook Pixel, etc.
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'form_submit', {
+                        'event_category': 'Lead Generation',
+                        'event_label': 'APX Wealth Premier Consultation'
+                    });
+                }
+            });
+        }
+
+        // Enhanced form field interactions
+        document.querySelectorAll('.mauticform-input, .mauticform-selectbox').forEach(field => {
+            field.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            
+            field.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
